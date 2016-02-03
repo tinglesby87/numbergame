@@ -1,31 +1,26 @@
 
 import random
 def game():
-    number = random.randint(1, 100)
-    guesses = []
+    guesses = 0
+    secret_num= int(input("Please input a secret number"))
+    guess = random.randint(1, 100)
 
-    while len(guesses) < 7:
-        try:
-            guess = int(input("Guess a number between 1 and 100: "))
-        except ValueError:
-            print("{} is not a number! Please guess again".format(guess))
+    while guesses < 7:
+
+        if guess == secret_num:
+            print("You got it! My number was {}".format(secret_num))
+            break
+        elif guess > secret_num:
+            print('Your guess is too high, guess again {}'.format(guess))
+            guess= random.randint(1,guess)
+            guesses += 1
         else:
-            if guess == number:
-                print("You got it! My number was {}".format(number))
-                break
-            elif guess > number:
-                print("{} is too high, guess again".format(guess))
-            else:
-                print("{} is too low, guess again".format(guess))
-            guesses.append(guess)
+            print('Your guess is too low, guess again {}'.format(guess))
+            guess= random.randint(guess,100)
+            guesses += 1
     else:
-        print("You lose, my number was {}".format(number))
+            print("You lose, my number was {}".format(secret_num))
 
-    play_again = input("Do you want to play again? Y/n")
-    if play_again.lower() != 'n':
-        game()
-    else:
-            print("See ya")
 
 game()
 
